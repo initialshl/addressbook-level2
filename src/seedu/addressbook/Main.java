@@ -82,9 +82,9 @@ public class Main {
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
             try {
-            	storage.checkIfExistsOnDisk();
+                storage.checkIfExistsOnDisk();
             } catch (StorageFileNotFoundException e) {
-            	ui.showToUser(e.getMessage());
+                ui.showToUser(e.getMessage());
                 exit();
             }
             CommandResult result = executeCommand(command);
