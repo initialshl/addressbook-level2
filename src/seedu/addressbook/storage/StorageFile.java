@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -39,6 +40,15 @@ public class StorageFile {
      */
     public static class StorageOperationException extends Exception {
         public StorageOperationException(String message) {
+            super(message);
+        }
+    }
+    
+    /**
+     * Signals that the storage file cannot be found on disk.
+     */
+    public static class StorageFileNotFoundException extends Exception {
+        public StorageFileNotFoundException(String message) {
             super(message);
         }
     }
@@ -143,6 +153,17 @@ public class StorageFile {
 
     public String getPath() {
         return path.toString();
+    }
+    
+    /**
+     * Verifies that the storage file exists on the disk.
+     * 
+     * @throws StorageFileNotFoundException if the storage file is missing.
+     */
+    public void checkIfExistsOnDisk() throws StorageFileNotFoundException {
+       if (!Files.exists(path)) {
+    	   throw new StorageFileNotFoundException("Storage file is missing");
+       }
     }
 
 }
