@@ -84,4 +84,10 @@ public class Person implements ReadOnlyPerson {
         return getAsTextShowAll();
     }
 
+    /**
+     * Returns this person's details as a printable string.
+     */
+    public String getPrintableString() {
+        return Printable.getPrintableString(getName(), getPhone(), getEmail(), getAddress());
+    }
 }
