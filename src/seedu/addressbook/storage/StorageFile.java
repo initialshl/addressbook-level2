@@ -43,7 +43,7 @@ public class StorageFile {
             super(message);
         }
     }
-    
+
     /**
      * Signals that the storage file cannot be found on disk.
      */
@@ -154,16 +154,16 @@ public class StorageFile {
     public String getPath() {
         return path.toString();
     }
-    
+
     /**
      * Verifies that the storage file exists on the disk.
      * 
      * @throws StorageFileNotFoundException if the storage file is missing.
      */
     public void checkIfExistsOnDisk() throws StorageFileNotFoundException {
-       if (!Files.exists(path)) {
-    	   throw new StorageFileNotFoundException("Storage file is missing");
-       }
+        if (!Files.exists(path)) {
+            throw new StorageFileNotFoundException("Storage file is missing");
+        }
     }
 
 }
