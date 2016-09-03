@@ -8,31 +8,48 @@ import seedu.addressbook.data.person.Person;
  */
 public class Tagging {
 
-    public enum TaggingType {
+    public enum TagOperation {
         ADD, REMOVE
     };
 
-    private final TaggingType taggingType;
+    private static final String STRING_PREPEND_TAGOPERATION_ADD = "+ ";
+    private static final String STRING_PREPEND_TAGOPERATION_REMOVE = "- ";
+
+    private final TagOperation tagOperation;
     private final Person person;
     private final Tag tag;
 
     /**
      * Creates Tagging with specified type of operation.
      */
-    public Tagging(TaggingType taggingType, Person person, Tag tag) {
-        this.taggingType = taggingType;
+    public Tagging(TagOperation tagOperation, Person person, Tag tag) {
+        this.tagOperation = tagOperation;
         this.person = person;
         this.tag = tag;
+    }
+    
+    public TagOperation getTagOperation() {
+        return tagOperation;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public Tag getTag() {
+        return tag;
     }
 
     @Override
     public String toString() {
-        switch (taggingType) {
+        StringBuilder sb = new StringBuilder(person + " [" + tag + "]");
+        
+        switch (tagOperation) {
         case ADD:
-            return "+ " + person + " [" + tag + "]";
+            sb.insert(0, STRING_PREPEND_TAGOPERATION_ADD);
         case REMOVE:
-            return "- " + person + " [" + tag + "]";
+            sb.insert(0, STRING_PREPEND_TAGOPERATION_REMOVE);
         }
-        return "  " + person + " [" + tag + "]";
+        return sb.toString();
     }
 }
